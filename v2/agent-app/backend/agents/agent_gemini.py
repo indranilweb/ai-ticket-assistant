@@ -1,6 +1,7 @@
 import re
 import google.generativeai as genai
 import config
+import secret
 
 # --- CONFIGURATION ---
 # IMPORTANT: Replace "YOUR_API_KEY" with your actual Google AI Studio API key.
@@ -11,7 +12,7 @@ import config
 #     GOOGLE_API_KEY = userdata.get('GOOGLE_API_KEY')
 # except ImportError:
     # Used if running locally
-GOOGLE_API_KEY = config.GEMINI_KEY # "YOUR_API_KEY"
+GOOGLE_API_KEY = secret.GEMINI_KEY # "YOUR_API_KEY"
 
 genai.configure(api_key=GOOGLE_API_KEY)
 

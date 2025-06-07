@@ -5,6 +5,7 @@ from langchain.chains import LLMChain
 from transformers import pipeline
 from huggingface_hub import login
 import config
+import secret
 
 # Define available support groups
 SUPPORT_GROUPS = config.SUPPORT_GROUPS
@@ -15,7 +16,7 @@ def get_support_group_definitions():
 
 class TicketAssignmentAgent:
     def __init__(self):
-        hf_token = config.HF_TOKEN
+        hf_token = secret.HF_TOKEN
         if not hf_token:
             raise ValueError("Hugging Face API token not found. Set HF_TOKEN environment variable.")
 

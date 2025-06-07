@@ -1,11 +1,3 @@
-import os
-
-# Add HuggingFace token here or import from env var
-HF_TOKEN = os.getenv("HF_TOKEN")
-
-# Add Gemini AI token here or import from env var
-GEMINI_KEY = os.getenv("GEMINI_KEY")
-
 # Define available support groups and their roles
 SUPPORT_GROUPS = {
     "Hardware Support": "For issues related to physical devices like laptops, keyboards, and mice.",
