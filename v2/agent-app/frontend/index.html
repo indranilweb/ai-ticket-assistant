@@ -5,123 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <title>IT Support Ticket</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .container {
-            background: #fff;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 350px;
-        }
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-        label {
-            display: block;
-            margin-top: 10px;
-            font-weight: bold;
-            color: #555;
-        }
-        input, textarea {
-            padding: 8px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        textarea {
-            height: 100px;
-            resize: none;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            margin-top: 15px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .response-content {
-            border: 1px solid #007bff;
-            border-radius: 4px;
-            padding: 8px;
-            text-align: center;
-            margin-top: 15px;
-            font-size: 14px;
-            color: #007bff;
-        }
-        .response-loading {
-            display: flex;
-            text-align: left;
-        }
-        .loader-text {
-            margin-left: 15px;
-        }
-        .support-group {
-            font-size: 18px;
-            font-weight: 700;
-            margin-top: 3px;
-        }
 
-        .loader {
-            width: 32px;
-            height: 32px;
-            display: inline-block;
-            position: relative;
-        }
-        .loader::after,
-        .loader::before {
-            content: '';  
-            box-sizing: border-box;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            border: 8px solid #007bff;
-            position: absolute;
-            left: 0;
-            top: 0;
-            opacity: 0;
-            animation: animloader 2s linear infinite;
-        }
-        .loader::after {
-            animation-delay: 1s;
-        }
-
-        @keyframes animloader {
-            0% {
-                transform: scale(0);
-                border-width: 16px;
-                opacity: 1;
-            }
-            50% {
-                transform: scale(0.5);
-                border-width: 8px;
-                opacity: 0.7;
-            }
-            100% {
-                transform: scale(1);
-                border-width: 2px;
-                opacity: 0;
-            }
-        }
-    </style>
+    <!-- Linking the CSS file -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
@@ -138,29 +24,7 @@
         <p id="response"></p>
     </div>
 
-    <script>
-        function submitTicket() {
-            const ticket = {
-                subject: document.getElementById('subject').value,
-                description: document.getElementById('description').value
-            };
-            document.getElementById("response").innerHTML = "<div class='response-content response-loading'><span class='loader'></span><span class='loader-text'>Please wait while we assign your ticket to the correct support group.</span></div>";
-
-            fetch("http://localhost:8000/assign-ticket", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(ticket)
-            })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById("response").innerHTML = "<div class='response-content'><div>You ticket has been assigned to: </div><div class='support-group'>" + data.support_group + "</div></div>";
-            })
-            .catch(error => {
-                document.getElementById("response").innerHTML = "<div class='response-content'>Error: " + error  + "</div>";
-            });
-        }
-    </script>
+    <!-- Linking the JavaScript file -->
+    <script src="script.js"></script>
 </body>
 </html>
