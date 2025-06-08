@@ -2,7 +2,7 @@
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from agents.agent_gemini import TicketAssignmentAgent  # Import AI agent class
+from agents.agent_gemini import TicketAssistantAgent  # Import AI agent class
 
 app = FastAPI()
 
@@ -15,7 +15,13 @@ app.add_middleware(
     allow_headers=["*"],  # Allow all headers
 )
 
-agent = TicketAssignmentAgent()  # Initialize AI agent
+agent = TicketAssistantAgent()  # Initialize AI agent
+
+@app.post("/review-ticket")
+async def review_ticket(request: Request):
+    issue = await request.json()
+    ticket = agent.review_ticket(issue)
+    return {"ticket": ticket}
 
 @app.post("/assign-ticket")
 async def assign_ticket(request: Request):

@@ -2,29 +2,70 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>IT Support Ticket</title>
+    <head>
+        <meta charset="UTF-8">
+        <title>IT Support Ticket</title>
 
-    <!-- Linking the CSS file -->
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="container">
-        <h2>Submit a Support Ticket</h2>
-        
-        <label for="subject">Subject:</label>
-        <input type="text" id="subject" required>
-        
-        <label for="description">Description:</label>
-        <textarea id="description" required></textarea>
-        
-        <button onclick="submitTicket()">Submit Ticket</button>
+        <!-- Linking the CSS file -->
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="issue-wrapper">
+                <!-- Issue draft -->
+                <div id="issueDraft" class="container draft">
+                    <h2>Have An Issue?</h2>
+                    
+                    <label for="issue">Describe here:</label>
+                    <textarea id="issue" required></textarea>
+                    
+                    <div>
+                        <button class="btn-solid" onclick="reviewTicket()">Analyze <span class="right-arrow">&rarr;</span></button>
+                    </div>
+                </div>
 
-        <p id="response"></p>
-    </div>
+                <!-- Review draft -->
+                <div id="issueReview" class="container review hidden">
+                    <h5>Below Support Ticket will be created based on your issue</h5>
+                    <h2>Please Review and Submit</h2>
 
-    <!-- Linking the JavaScript file -->
-    <script src="script.js"></script>
-</body>
+                    <div class="separator"></div>
+                    
+                    <div class='response-content'>
+                        <div class="support-label">You ticket will be assigned to: </div>
+                        <div id="response" class='support-group'>-</div>
+                    </div>
+
+                    <label for="subject">Subject:</label>
+                    <input type="text" id="subject" required>
+                    
+                    <label for="description">Description:</label>
+                    <textarea id="description" required></textarea>
+                    
+                    <div>
+                        <!-- <button onclick="backToDraft()">Back <span class="right-arrow">&larr;</span></button> -->
+                        <button class="btn-outline">Submit Ticket</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Troubleshoot -->
+            <div id="issueTroubleshoot" class="container troubleshoot hidden">
+                <h4>Troubleshooting Tips</h4>
+            </div>
+        </div>
+
+        <!-- Loader -->
+        <div id="analyzing" class="loader-wrapper hidden">
+            <div class="container pending">
+                <div class='response-content response-loading'>
+                    <span class='loader'></span>
+                    <span class='loader-text'>Please wait while your issue is being analyzed.</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Linking the JavaScript file -->
+        <script src="script.js"></script>
+    </body>
 </html>

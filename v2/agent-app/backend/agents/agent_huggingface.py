@@ -47,7 +47,7 @@ class TicketAssignmentAgent:
         # Define AI prompt
         self.prompt = PromptTemplate(
             input_variables=["group_definitions", "subject", "description"],
-            template=config.PROMPT_1
+            template=config.SUGGEST_SUPPORT_PROMPT
         )
 
         self.chain = LLMChain(llm=self.llm, prompt=self.prompt)
