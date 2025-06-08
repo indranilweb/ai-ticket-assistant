@@ -59,6 +59,7 @@ input, textarea {
     margin-top: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-size: 14px;
 }
 input:focus, textarea:focus {
     outline-color: #2563eb;
