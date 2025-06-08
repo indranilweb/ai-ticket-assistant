@@ -1,12 +1,12 @@
 # Define available support groups and their roles
-SUPPORT_GROUPS = {
+SUPPORT_GROUPS_1 = {
     "Hardware Support": "For issues related to physical devices like laptops, keyboards, and mice.",
     "Software Support": "For problems with applications, operating systems, and software licenses.",
     "Network Support": "For connectivity issues, including Wi-Fi, VPN, and internet access problems.",
     "User Access Management": "For requests related to password resets, account lockouts, and permissions."
 }
 
-SUPPORT_GROUPS_1 = {
+SUPPORT_GROUPS = {
     "Hardware Support": (
         "Handles all issues related to the physical components of IT infrastructure. "
         "This includes diagnostics, repair, replacement, and lifecycle management of physical devices."
@@ -92,10 +92,20 @@ You are an intelligent IT support ticket assignment agent. Your task is to analy
 Here are the available support groups and their responsibilities:
 {group_definitions}
 
-Analyze the following ticket and determine the most appropriate support group.
+Analyze the following ticket and carefully determine the most appropriate support group from the given list.
 
 Ticket Subject: {subject}
 Ticket Description: {description}
 
 Provide only the name of the correct support group as your answer. Do not add any other text. Do not add anything after your answer.
+"""
+
+SUGGEST_TROUBLESHOOT_PROMPT = """
+Please provide the top 3 troubleshooting steps in compact points for the issue described below. Each step should be 1-2 sentences long. The output should be in JSON format with two fields: "title" and "action".
+
+Output in JSON array Format:
+title: [Example Title]
+action: [Example compact action description]
+
+Issue: {issue_description}
 """

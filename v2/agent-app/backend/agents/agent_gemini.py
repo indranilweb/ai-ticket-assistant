@@ -17,7 +17,7 @@ GOOGLE_API_KEY = secret.GEMINI_KEY # "YOUR_API_KEY"
 
 genai.configure(api_key=GOOGLE_API_KEY)
 # Define the model. 'gemini-pro' is a powerful and free model.
-model = genai.GenerativeModel('gemini-1.5-flash')
+model = genai.GenerativeModel('gemini-2.0-flash') # gemini-1.5-flash gemini-2.0-flash
 
 # Define available support groups
 SUPPORT_GROUPS = config.SUPPORT_GROUPS
@@ -30,7 +30,8 @@ def get_llm_generate_content(prompt):
     try:
         response = model.generate_content(prompt)
         # LLMs sometimes add ```json ... ``` markers
-        cleaned_response = re.search(r'```json\n({.*})\n```', response.text, re.DOTALL)
+        cleaned_response = re.search(r'```json\n(\[.*\]|\{.*\})\n```', response.text, re.DOTALL)
+        # cleaned_response = re.search(r'```json\n({.*})\n```', response.text, re.DOTALL)
         if cleaned_response:
             json_text = cleaned_response.group(1)
         else:
@@ -88,3 +89,23 @@ class TicketAssistantAgent:
         assigned_group = get_llm_generate_content(prompt)
             
         return assigned_group if assigned_group in SUPPORT_GROUPS else "Unclassified"
+    
+    def suggest_troubleshoot(self, issue):
+        """Processes a ticket description and returns the troubleshooting tips."""
+
+        # --- PROMPT ASSEMBLY ---
+        # 1. Get the prompt template from the config file.
+        prompt_template = config.SUGGEST_TROUBLESHOOT_PROMPT
+
+        # 2. Fill in the placeholders with the ticket's data.
+        prompt = prompt_template.format(
+            issue_description = issue["text"]
+        )
+
+        troubleshooting_tips = get_llm_generate_content(prompt)
+
+        try:
+            return json.loads(troubleshooting_tips)
+        except json.JSONDecodeError as e:
+            print(f"Error parsing JSON: {e}")
+            return None  # Return None or handle the error as needed

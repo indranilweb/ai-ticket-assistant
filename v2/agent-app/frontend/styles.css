@@ -67,12 +67,19 @@ textarea {
     height: 70px;
     resize: vertical;
 }
+.tip-item {
+    margin-top: 15px;
+}
+.tip-item p {
+    margin: 0;
+    font-size: 14px;
+}
 button {
     padding: 10px 15px;
     margin-top: 20px;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
 }
 .btn-solid {
@@ -125,6 +132,12 @@ button {
 .separator {
     border-bottom: 1px solid #ececec;
     margin-bottom: 20px;
+}
+.error-message {
+    position: absolute;
+    bottom: 100px;
+    background: #ffebeb;
+    color: #d90000;
 }
 .loader-wrapper {
     background: rgba(255, 255, 255, 0.5);
